@@ -7,8 +7,8 @@ let resArr = [];
 const startGame = () => {
     // getWord();
     reset();
-   board = addLetters(wordArr);
-    };
+    addLetters(wordArr);
+};
 //resets board
 const reset = () => {
     $( "li" ).remove();
@@ -55,7 +55,7 @@ const hangMan = () => {
     let guess = playerGuess();
     testGuess(guess, wordArr); 
     checkForWin(wordArr, resArr);
-
+//this is for later
     // if(checkForWin){
     //     console.log('you winner')
     //     reset();
