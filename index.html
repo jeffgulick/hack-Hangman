@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="/assets/styles.css">
     <script src="DOM.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -15,17 +16,16 @@
     <div>
         <div class="jumbotron">
             <h1 class="display-4">Lets Play Hang Man!!!</h1>
-            <div class="wordToGuess" id="answer">
-                <h1 id="word"></h1>
-              </div>
+            <ul id="board"></ul>
             <div class="input-group mb-3">
                 <div class="input-group-prepend center">
-                  <button class="btn btn-outline-secondary" type="button" id="button-addon1" onclick="playerGuess()">Submit Guess</button>
+                  <button class="btn btn-outline-secondary" type="button" id="button-addon1" onclick="hangMan()" >Submit Guess</button>
                 </div>
-                <input type="text" id="guess" placeholder=""  >
+                <input type="text" id="guess">
               </div>
             <hr class="my-4">
-            <a class="btn btn-primary btn-lg" href="#" role="button">reset</a>
+            <a class="btn btn-primary btn-lg" href="#" role="button" onclick="startGame()">Start Game</a>
+            <a class="btn btn-primary btn-lg" href="#" role="button" onclick="reset()">Reset Game</a>
           </div>
     </div>
 </body>

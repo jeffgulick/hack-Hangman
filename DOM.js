@@ -1,20 +1,31 @@
 `use strict`
 
-let wordArr = ["h", "e", "l", "l", "o"];
+let wordArr = ['t', 'a', 'b', 'l', 'e'];
 let resArr = [];
 
 
-const playerGuess = () => {
-    let guess = document.getElementById('guess').value;
-    document.getElementById('guess').value = ''
-    buildBoard(wordArr);
-    hangMan(guess);
-    playerGuess();
+const startGame = () => {
+    // getWord();
+   board = addLetters(wordArr);
     };
 
-const buildBoard = (array) => {
-   let board = array.map(element => '_');
-    // document.getElementById('word').innerHTML = board;
+const reset = () => {
+    $( "li" ).remove();
+}
+
+const playerGuess = () => {
+    let guess = document.getElementById('guess').value;
+    return guess;
+}
+
+const addLetters = (array) => {
+   array.map(num => {
+       let letter = document.createElement('li');
+       letter.innerHTML = num;
+       letter.style.color = 'white'
+       let board = document.getElementById('board');
+       board.appendChild(letter);
+    });
 }
 
 const checkForWin = (a, b) => {
@@ -27,28 +38,23 @@ const checkForWin = (a, b) => {
 }
 
 const testGuess = (guess, arr) => {
-    
+    document.getElementById('guess').value = "";
     for(let i = 0; i < arr.length; i++){
         if(arr[i] === guess){
             resArr[i] = guess;
-            document.getElementById('word').innerHTML = resArr;
-            
-            // let newElement = document.createElement('H1');
-            // newElement.innerHTML = resArr;
-            // document.getElementById('answer').appendChild(newElement)
+            let temp = document.getElementsByTagName("li").item(i);
+            temp.style.color = 'black'
         }
     }       
 }
 
-const hangMan = (guess) => {
+const hangMan = () => {
+    let guess = playerGuess();
     testGuess(guess, wordArr); 
-    checkForWin(guess)
-    // if(checkForWin(wordArr, resArr)){
-    //     console.log("Winner");
-    //     printBoard();
-    //     resetBoard(wordArr);
-    // }else {
-    //     playerGuess();
+    checkForWin(wordArr, resArr);
+
+    // if(checkForWin){
+    //     console.log('you winner')
+    //     reset();
     // }
-    playerGuess();
 }

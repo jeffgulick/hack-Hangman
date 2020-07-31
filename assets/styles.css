@@ -1,3 +1,17 @@
-.wordToGuess {
+#board {
     display: flex;
 }
+
+li {
+    font-size: 30pt;
+    width: 35pt;
+    height: 40pt;
+    margin: 5pt;
+    text-align: center;
+    background-color: white;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+  }
