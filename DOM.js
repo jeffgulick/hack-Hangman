@@ -6,6 +6,7 @@ let resArr = [];
 
 const startGame = () => {
     // getWord();
+    reset();
    board = addLetters(wordArr);
     };
 
