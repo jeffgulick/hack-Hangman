@@ -19,6 +19,7 @@ ul {
 
   .jumbotron {
       margin-bottom: 0;
+      background-image: linear-gradient( blue , purple);
   }
 
   .bottom {
