@@ -6,7 +6,7 @@ let wrongArr = [];
 
 //func that starts the game
 const startGame = () => {
-    // getWord();
+//    wordArr = getWord();
     reset();
     addLetters(wordArr);
     resArr = [];
