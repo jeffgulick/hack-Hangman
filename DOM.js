@@ -55,6 +55,7 @@ const addLetters = (array) => {
     //creating li elements with letters in them
    array.map(num => {
        let letter = document.createElement('li');
+       $(letter).addClass('li');
        let answer = document.createElement('P');
        answer.innerHTML = num;
 

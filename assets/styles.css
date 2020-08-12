@@ -2,7 +2,7 @@
     display: flex;
 }
 
-li {
+.li {
     font-size: 30pt;
     width: 35pt;
     height: 40pt;
@@ -11,7 +11,7 @@ li {
     background-color: white;
 }
 
-ul {
+#board {
     list-style-type: none;
     padding: 0;
   }
@@ -45,6 +45,7 @@ ul {
       width: 150pt;
       background-color: white;
   }
+
   img {
     height: 65pt;
     width: 65pt;
