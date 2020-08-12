@@ -39,3 +39,14 @@ ul {
   .bottom {
       margin-left: 10pt;
   }
+
+  #gallow {
+      height: 153pt;
+      width: 150pt;
+      background-color: white;
+  }
+  img {
+    height: 65pt;
+    width: 65pt;
+
+  }

@@ -2,6 +2,7 @@
 
 let wordArr = [];
 let resArr = [];
+let wrongGuess = 0;
 
 //func that starts the game
 const startGame = () => {
@@ -22,6 +23,10 @@ const getWord = () => {
 const reset = () => {
     $( "li" ).remove();
     $("p").remove();
+    wrongGuess = 0;
+    //removes hangman image
+    $myDiv = $('#gallow');
+    $myDiv.css('background-image', 'none');
 }
 
 //gets player guess
@@ -77,15 +82,31 @@ const checkForWin = (a, b) => {
 //testing for correct guess. revealing letters on board
 const testGuess = (guess, arr) => {
     document.getElementById('guess').value = "";
+    let goodGuess = 0;
+    
     for(let i = 0; i < arr.length; i++){
+        
         if(arr[i] === guess){
             resArr[i] = guess;
-
+            goodGuess++;
             //below reveals correctly guessed letters on the board
             let temp = document.getElementsByClassName('hello').item(i);
             temp.style.visibility = 'visible'
         } 
-    }       
+    } 
+    //building gallows and hangman
+    if(goodGuess == 0){
+        wrongGuess++;
+        let image = document.getElementById('gallow');
+        image.style.backgroundImage = `url(/assets/images/${wrongGuess}.jpg)`;
+    } 
+    if(wrongGuess >= 7){
+        setTimeout(() => {
+            let word = wordArr.join('');
+            alert(`You lost, the correct word was ${word}`);
+            reset();
+        }, 500);
+    }
 }
 
 //main function for game
