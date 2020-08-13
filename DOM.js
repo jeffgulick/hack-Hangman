@@ -101,7 +101,7 @@ const testGuess = (guess, arr) => {
     if(goodGuess == 0){
         wrongGuess++;
         let image = document.getElementById('gallow');
-        image.style.backgroundImage = `url(/assets/images/${wrongGuess}.jpg)`;
+        image.style.backgroundImage = `url(./assets/images/${wrongGuess}.jpg)`;
     } 
     if(wrongGuess >= 7){
         setTimeout(() => {
