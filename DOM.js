@@ -55,12 +55,14 @@ const addLetters = (array) => {
     //creating li elements with letters in them
    array.map(num => {
        let letter = document.createElement('li');
-       $(letter).addClass('li');
+    //    $(letter).addClass('li');
+       letter.classList.add('li')
        let answer = document.createElement('P');
        answer.innerHTML = num;
 
        //adding class to p for later
-       $(answer).addClass('hello');
+    //    $(answer).addClass('hello');
+       answer.classList.add('hello')
        answer.style.visibility = 'hidden'; //hiding letter
 
        //putting all of the pieces of the board together
