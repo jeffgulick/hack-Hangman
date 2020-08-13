@@ -4,6 +4,12 @@ let wordArr = [];
 let resArr = [];
 let wrongGuess = 0;
 
+//func that randomly picks a word
+const getWord = () => {
+    let wordsArray = ['worm', 'puny', 'distinct', 'wash', 'prickly', 'belong', 'sturdy', 'rule', 'decisive', 'crowded'];
+    return wordsArray[Math.floor(Math.random() * 10)];
+}
+
 //func that starts the game
 const startGame = () => {
     let getAWord = getWord();
