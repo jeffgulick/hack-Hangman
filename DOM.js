@@ -6,6 +6,7 @@ let wrongGuess = 0;
 
 //func that starts the game
 const startGame = () => {
+    $( "#guess" ).prop( "disabled", false );
     let getAWord = getWord();
     wordArr = getAWord.split('');
     reset();
@@ -27,6 +28,7 @@ const reset = () => {
     //removes hangman image
     $myDiv = $('#gallow');
     $myDiv.css('background-image', 'none');
+
 }
 
 //gets player guess
@@ -108,6 +110,8 @@ const testGuess = (guess, arr) => {
             let word = wordArr.join('');
             alert(`You lost, the correct word was ${word}`);
             reset();
+            $( "#guess" ).prop( "disabled", true );
+
         }, 500);
     }
 }
@@ -121,6 +125,8 @@ const hangMan = () => {
             let close = confirm("You Win!!!")
             if(close == true){
                 reset();
+                $( "#guess" ).prop( "disabled", true );
+
             }
         }, 250);
 
