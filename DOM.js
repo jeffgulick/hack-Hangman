@@ -1,12 +1,20 @@
 `use strict`
 
+
 let wordArr = [];
 let resArr = [];
 let wrongGuess = 0;
 
+
+// window.onload = () => {
+//     $("#button-addon1").addClass('disabled');
+// }
+
 //func that starts the game
 const startGame = () => {
-    $( "#guess" ).prop( "disabled", false );
+    $("#guess").prop( "disabled", false );
+    $("#button-addon1").prop( "disabled", false );
+
     let getAWord = getWord();
     wordArr = getAWord.split('');
     reset();
@@ -28,13 +36,23 @@ const reset = () => {
     //removes hangman image
     $myDiv = $('#gallow');
     $myDiv.css('background-image', 'none');
+}
 
+const resetGame = () => {
+    $( "li" ).remove();
+    $("p").remove();
+    wrongGuess = 0;
+    //removes hangman image
+    $myDiv = $('#gallow');
+    $myDiv.css('background-image', 'none');
+    $("#guess").prop( "disabled", true );
+    $("#button-addon1").prop( "disabled", true );
 }
 
 //gets player guess
 const playerGuess = () => {
     let guess = document.getElementById('guess').value;
-
+    guess = guess.toLowerCase();
     //below checks for any input that is not a letter and returns a message. also prints out the guesses to the dom
     let check = /^[A-Za-z]+$/;
 
@@ -57,13 +75,11 @@ const addLetters = (array) => {
     //creating li elements with letters in them
    array.map(num => {
        let letter = document.createElement('li');
-    //    $(letter).addClass('li');
        letter.classList.add('li')
        let answer = document.createElement('P');
        answer.innerHTML = num;
 
        //adding class to p for later
-    //    $(answer).addClass('hello');
        answer.classList.add('hello')
        answer.style.visibility = 'hidden'; //hiding letter
 
@@ -110,7 +126,8 @@ const testGuess = (guess, arr) => {
             let word = wordArr.join('');
             alert(`You lost, the correct word was ${word}`);
             reset();
-            $( "#guess" ).prop( "disabled", true );
+            // $( "#guess" ).prop( "disabled", true );
+            startGame();
 
         }, 500);
     }
@@ -125,7 +142,8 @@ const hangMan = () => {
             let close = confirm("You Win!!!")
             if(close == true){
                 reset();
-                $( "#guess" ).prop( "disabled", true );
+                // $( "#guess" ).prop( "disabled", true );
+                startGame();
 
             }
         }, 250);
