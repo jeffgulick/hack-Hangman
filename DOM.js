@@ -6,10 +6,6 @@ let resArr = [];
 let wrongGuess = 0;
 
 
-// window.onload = () => {
-//     $("#button-addon1").addClass('disabled');
-// }
-
 //func that starts the game
 const startGame = () => {
     $("#guess").prop( "disabled", false );
