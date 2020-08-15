@@ -82,7 +82,8 @@ const addLetters = (array) => {
        //putting all of the pieces of the board together
        let board = document.getElementById('board');
        board.appendChild(letter);
-       letter.appendChild(answer)
+       letter.appendChild(answer);
+       letter.classList.add('animate__animated', 'animate__bounceInLeft');
     });
 }
 
@@ -118,14 +119,18 @@ const testGuess = (guess, arr) => {
         image.style.backgroundImage = `url(./assets/images/${wrongGuess}.jpg)`;
     } 
     if(wrongGuess >= 7){
+        let animate = document.getElementById('gallow');
+        animate.classList.add('animate__animated', 'animate__fadeOutDown');
+        animate.style.setProperty('--animate-duration', '2s');
         setTimeout(() => {
             let word = wordArr.join('');
             alert(`You lost, the correct word was ${word}`);
+            animate.classList.remove('animate__animated', 'animate__fadeOutDown')
             reset();
             // $( "#guess" ).prop( "disabled", true );
             startGame();
 
-        }, 500);
+        }, 1500);
     }
 }
 
@@ -134,15 +139,17 @@ const hangMan = () => {
     let guess = playerGuess();
     testGuess(guess, wordArr); 
     if(checkForWin(wordArr, resArr)){
+        let tempWin = document.getElementById('board');
+        tempWin.classList.add('animate__animated', 'animate__shakeY');
         setTimeout(() => {
             let close = confirm("You Win!!!")
             if(close == true){
                 reset();
                 // $( "#guess" ).prop( "disabled", true );
                 startGame();
-
+                animate.classList.remove('animate__animated', 'animate__shakeY')
             }
-        }, 250);
+        }, 1050);
 
         
         console.log('you winner')
