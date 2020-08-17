@@ -120,14 +120,13 @@ const testGuess = (guess, arr) => {
     } 
     if(wrongGuess >= 7){
         let animate = document.getElementById('gallow');
-        animate.classList.add('animate__animated', 'animate__fadeOutDown');
-        animate.style.setProperty('--animate-duration', '2s');
+        animate.classList.add('animate__animated', 'animate__heartBeat');
+        animate.style.setProperty('--animate-duration', '1.5s');
         setTimeout(() => {
             let word = wordArr.join('');
             alert(`You lost, the correct word was ${word}`);
-            animate.classList.remove('animate__animated', 'animate__fadeOutDown')
+            animate.classList.remove('animate__animated', 'animate__heartBeat')
             reset();
-            // $( "#guess" ).prop( "disabled", true );
             startGame();
 
         }, 1500);
@@ -140,15 +139,18 @@ const hangMan = () => {
     testGuess(guess, wordArr); 
     if(checkForWin(wordArr, resArr)){
         let tempWin = document.getElementById('board');
-        tempWin.classList.add('animate__animated', 'animate__shakeY');
+        // tempWin.classList.add('animate__animated', 'animate__shakeY');
+        // tempWin.style.setProperty('--animate-duration', '1s');
+
         setTimeout(() => {
-            let close = confirm("You Win!!!")
+
+            let close = confirm("You Win!!!");
+            // animate.classList.remove('animate__animated', 'animate__shakeY')
             if(close == true){
                 reset();
-                // $( "#guess" ).prop( "disabled", true );
                 startGame();
-                animate.classList.remove('animate__animated', 'animate__shakeY')
             }
+
         }, 1050);
 
         
