@@ -11,20 +11,22 @@ const startGame = () => {
     $("#guess").prop( "disabled", false );//enabling input
     $("#button-addon1").prop( "disabled", false );//enabling button
 
-    //allows user to hit enter key to sumbit guess. keycode 13 is the enter key
-    let input = document.getElementById('guess');
-    input.addEventListener('keyup', function(event){
-        if(event.keyCode == 13) {
-            event.preventDefault();
-            document.getElementById('button-addon1').click();
-        }
-    } )
-    
     let getAWord = words[Math.floor(Math.random() * words.length)];//gets a random word from array
     wordArr = getAWord.split('');//splits string into array
     reset();
     addLetters(wordArr);
     resArr = [];
+
+    //  //allows user to hit enter key to sumbit guess. keycode 13 is the enter key
+    // let input = document.getElementById('guess');
+    // input.addEventListener('keyup', function(event){
+    //     if(event.keyCode === 13) {
+    //         event.preventDefault();
+    //         document.getElementById('button-addon1').click();
+    //     }
+    // } )
+
+
 };
 
 //logic for the reset button
@@ -150,8 +152,13 @@ const hangMan = () => {
             if(close == true){
                 reset();
                 startGame();
+            } else {
+                reset();
+                startGame();
             }
         }, 1050);      
         console.log('you winner')
     }
 }
+
+
