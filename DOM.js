@@ -5,28 +5,18 @@ let resArr = [];
 let wrongGuess = 0;
 const words = ['worm', 'puny', 'distinct', 'wash', 'prickly', 'belong', 'sturdy', 'rule', 'decisive', 'crowded', 'blue', 'red', 'commute',
 'ready', 'stop', 'virus', 'teacher', 'desert', 'dessert', 'worry', 'tribute', 'bicycle', 'triple'];
+const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z ']
 
 // //func that starts the game
 const startGame = () => {
     $("#guess").prop( "disabled", false );//enabling input
     $("#button-addon1").prop( "disabled", false );//enabling button
-
     let getAWord = words[Math.floor(Math.random() * words.length)];//gets a random word from array
     wordArr = getAWord.split('');//splits string into array
     reset();
     addLetters(wordArr);
+    addSelectors(alphabet);
     resArr = [];
-
-    //  //allows user to hit enter key to sumbit guess. keycode 13 is the enter key
-    // let input = document.getElementById('guess');
-    // input.addEventListener('keyup', function(event){
-    //     if(event.keyCode === 13) {
-    //         event.preventDefault();
-    //         document.getElementById('button-addon1').click();
-    //     }
-    // } )
-
-
 };
 
 //logic for the reset button
@@ -44,36 +34,57 @@ const resetGame = () => {
 //resets board
 const reset = () => {
     $( "li" ).remove();
+    $(".alpha").remove();
     $("p").remove();
     wrongGuess = 0;
     //removes hangman image
     $myDiv = $('#gallow');
     $myDiv.css('background-image', 'none');
 }
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //gets player guess
-const playerGuess = () => {
-    let guess = document.getElementById('guess').value;
-    guess = guess.toLowerCase();
-    //below checks for any input that is not a letter and returns a message. also prints out the guesses to the dom
-    let check = /^[A-Za-z]+$/;
+// const playerGuess = () => {
+//     let guess = document.getElementById('guess').value;
+//     guess = guess.toLowerCase();
+//     //below checks for any input that is not a letter and returns a message. also prints out the guesses to the dom
+//     let check = /^[A-Za-z]+$/;
 
-    if(guess.match(check)){
-        let used = document.getElementById('usedLetters');
-        let newElement = document.createElement('P');
-        newElement.innerHTML = guess;
-        used.appendChild(newElement); 
+//     if(guess.match(check)){
+//         let used = document.getElementById('usedLetters');
+//         let newElement = document.createElement('P');
+//         newElement.innerHTML = guess;
+//         used.appendChild(newElement); 
 
-    } else{
-        alert('Please enter valid input: A-Z')
-    }
-    return guess;
+//     } else{
+//         alert('Please enter valid input: A-Z')
+//     }
+//     return guess;
+// }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const addSelectors = (array) => {
+    array.forEach(letter => {
+        //creates buttons as selectors for guess
+        let element = document.getElementById('selectors');
+        let button = document.createElement('button');
+        button.classList.add('alpha');
+        button.innerHTML = letter;
+        element.appendChild(button);
+
+        button.addEventListener('click', function() {
+            button.style.visibility = 'hidden';
+            let guess = button.innerHTML;
+            guess = guess.toLowerCase();
+            hangMan(guess);
+            console.log(guess)
+        })
+    }) 
 }
 
 //adds board to dom and hides the word to guess
 const addLetters = (array) => {
     //creating li elements with letters in them
-   array.map(num => {
+   array.forEach(num => {
        let letter = document.createElement('li');
        letter.classList.add('li')
        let answer = document.createElement('P');
@@ -103,7 +114,6 @@ const checkForWin = (guess, arr) => {
 
 //testing for correct guess. revealing letters on board
 const testGuess = (guess, arr) => {
-    document.getElementById('guess').value = "";
     let goodGuess = 0;
     
     for(let i = 0; i < arr.length; i++){
@@ -131,14 +141,13 @@ const testGuess = (guess, arr) => {
             animate.classList.remove('animate__animated', 'animate__heartBeat')
             reset();
             startGame();
-
         }, 1500);
     }
 }
 
 //main function for game
-const hangMan = () => {
-    let guess = playerGuess();
+const hangMan = (letter) => {
+    let guess = letter;
     testGuess(guess, wordArr); 
 
     if(checkForWin(wordArr, resArr)){

@@ -17,11 +17,11 @@
   }
 
 
-  /* .jumbotron {
+  .jumbotron {
       margin-bottom: 0;
       background-image: linear-gradient( blue , purple);
       padding: 50pt 32pt;
-  } */
+  }
 
   .bottom {
       display: flex;
