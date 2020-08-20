@@ -17,23 +17,14 @@
     <div>
         <div class="jumbotron">
           <div id="wrong"></div>
-            <h1 class="display-4">Lets Play Hang Man!!!</h1>
+            <h1 class="display-4">Lets Play Hang Man!!</h1>
             <ul id="board"></ul>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend center">
-                  <button class="btn btn-outline-secondary" type="button" id="button-addon1" onclick="hangMan()" disabled>Submit Guess</button>
-                </div>
-                <input type="text" id="guess" disabled>
-              </div>
               <div id="gallow"></div>
+              <div id="selectors"></div>
             <hr class="my-4">
             <a class="btn btn-primary btn-lg" id="button" href="#" role="button" onclick="startGame()">Start/New</a>
             <a class="btn btn-primary btn-lg" href="#" role="button" onclick="resetGame()">Reset Game</a>
           </div>
-    </div>
-    <div class="bottom">
-      <h2>Guessed Letters: </h2>
-      <div id="usedLetters"></div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 </body>

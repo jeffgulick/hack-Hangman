@@ -1,41 +1,28 @@
 `use strict`
 
-
 let wordArr = [];
 let resArr = [];
 let wrongGuess = 0;
+const words = ['worm', 'puny', 'distinct', 'wash', 'prickly', 'belong', 'sturdy', 'rule', 'decisive', 'crowded', 'blue', 'red', 'commute',
+'ready', 'stop', 'virus', 'teacher', 'desert', 'dessert', 'worry', 'tribute', 'bicycle', 'triple'];
+const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z ']
 
-
-//func that starts the game
+// //func that starts the game
 const startGame = () => {
-    $("#guess").prop( "disabled", false );
-    $("#button-addon1").prop( "disabled", false );
-
-    let getAWord = getWord();
-    wordArr = getAWord.split('');
+    $("#guess").prop( "disabled", false );//enabling input
+    $("#button-addon1").prop( "disabled", false );//enabling button
+    let getAWord = words[Math.floor(Math.random() * words.length)];//gets a random word from array
+    wordArr = getAWord.split('');//splits string into array
     reset();
     addLetters(wordArr);
+    addSelectors(alphabet);
     resArr = [];
 };
 
-//func that randomly picks a word
-const getWord = () => {
-    let wordsArray = ['worm', 'puny', 'distinct', 'wash', 'prickly', 'belong', 'sturdy', 'rule', 'decisive', 'crowded'];
-    return wordsArray[Math.floor(Math.random() * 10)];
-    }
-
-//resets board
-const reset = () => {
-    $( "li" ).remove();
-    $("p").remove();
-    wrongGuess = 0;
-    //removes hangman image
-    $myDiv = $('#gallow');
-    $myDiv.css('background-image', 'none');
-}
-
+//logic for the reset button
 const resetGame = () => {
     $( "li" ).remove();
+    $(".alpha").remove();
     $("p").remove();
     wrongGuess = 0;
     //removes hangman image
@@ -45,31 +32,60 @@ const resetGame = () => {
     $("#button-addon1").prop( "disabled", true );
 }
 
+//resets board
+const reset = () => {
+    $( "li" ).remove();
+    $(".alpha").remove();
+    $("p").remove();
+    wrongGuess = 0;
+    //removes hangman image
+    $myDiv = $('#gallow');
+    $myDiv.css('background-image', 'none');
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //gets player guess
-const playerGuess = () => {
-    let guess = document.getElementById('guess').value;
-    guess = guess.toLowerCase();
-    //below checks for any input that is not a letter and returns a message. also prints out the guesses to the dom
-    let check = /^[A-Za-z]+$/;
+// const playerGuess = () => {
+//     let guess = document.getElementById('guess').value;
+//     guess = guess.toLowerCase();
+//     //below checks for any input that is not a letter and returns a message. also prints out the guesses to the dom
+//     let check = /^[A-Za-z]+$/;
 
-    if(guess.match(check)){
-        let used = document.getElementById('usedLetters');
-        let newElement = document.createElement('P');
-        newElement.innerHTML = guess;
-        used.appendChild(newElement);    
-    } else{
-        alert('Please enter valid input: A-Z')
-    }
+//     if(guess.match(check)){
+//         let used = document.getElementById('usedLetters');
+//         let newElement = document.createElement('P');
+//         newElement.innerHTML = guess;
+//         used.appendChild(newElement); 
 
+//     } else{
+//         alert('Please enter valid input: A-Z')
+//     }
+//     return guess;
+// }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    return guess;
+const addSelectors = (array) => {
+    array.forEach(letter => {
+        //creates buttons as selectors for guess
+        let element = document.getElementById('selectors');
+        let button = document.createElement('button');
+        button.classList.add('alpha');
+        button.innerHTML = letter;
+        element.appendChild(button);
+
+        button.addEventListener('click', function() {
+            button.style.visibility = 'hidden';
+            let guess = button.innerHTML;
+            guess = guess.toLowerCase();
+            hangMan(guess);
+            console.log(guess)
+        })
+    }) 
 }
 
 //adds board to dom and hides the word to guess
 const addLetters = (array) => {
-
     //creating li elements with letters in them
-   array.map(num => {
+   array.forEach(num => {
        let letter = document.createElement('li');
        letter.classList.add('li')
        let answer = document.createElement('P');
@@ -88,9 +104,9 @@ const addLetters = (array) => {
 }
 
 //checks logic for win
-const checkForWin = (a, b) => {
-    for(let i = 0; i<a.length; i++){
-        if(a[i] != b[i]){
+const checkForWin = (guess, arr) => {
+    for(let i = 0; i < guess.length; i++){
+        if(guess[i] != arr[i]){
             return false;
         }
     }
@@ -99,11 +115,9 @@ const checkForWin = (a, b) => {
 
 //testing for correct guess. revealing letters on board
 const testGuess = (guess, arr) => {
-    document.getElementById('guess').value = "";
     let goodGuess = 0;
     
     for(let i = 0; i < arr.length; i++){
-        
         if(arr[i] === guess){
             resArr[i] = guess;
             goodGuess++;
@@ -128,32 +142,33 @@ const testGuess = (guess, arr) => {
             animate.classList.remove('animate__animated', 'animate__heartBeat')
             reset();
             startGame();
-
         }, 1500);
     }
 }
 
 //main function for game
-const hangMan = () => {
-    let guess = playerGuess();
+const hangMan = (letter) => {
+    let guess = letter;
     testGuess(guess, wordArr); 
+
     if(checkForWin(wordArr, resArr)){
         let tempWin = document.getElementById('board');
-        // tempWin.classList.add('animate__animated', 'animate__shakeY');
-        // tempWin.style.setProperty('--animate-duration', '1s');
+        tempWin.classList.add('animate__animated', 'animate__heartBeat');
+        tempWin.style.setProperty('--animate-duration', '1s');
 
         setTimeout(() => {
-
             let close = confirm("You Win!!!");
-            // animate.classList.remove('animate__animated', 'animate__shakeY')
+            tempWin.classList.remove('animate__animated', 'animate__heartBeat')
             if(close == true){
                 reset();
                 startGame();
+            } else {
+                reset();
+                startGame();
             }
-
-        }, 1050);
-
-        
+        }, 1050);      
         console.log('you winner')
     }
 }
+
+
