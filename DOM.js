@@ -22,6 +22,7 @@ const startGame = () => {
 //logic for the reset button
 const resetGame = () => {
     $( "li" ).remove();
+    $(".alpha").remove();
     $("p").remove();
     wrongGuess = 0;
     //removes hangman image
